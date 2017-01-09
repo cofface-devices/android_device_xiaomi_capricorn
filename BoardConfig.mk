@@ -63,6 +63,9 @@ TARGET_USERIMAGES_USE_EXT4 := true
 # init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 
+RECOVERY_VARIANT := caf
+
+ifeq ($(RECOVERY_VARIANT), twrp)
 #twrp
 DEVICE_RESOLUTION := 1080x1920
 TARGET_CPU_SMP := true
@@ -87,3 +90,16 @@ TW_DEFAULT_LANGUAGE := zh_CN
 BOARD_DISABLE_BOOT_VERIFY := true
 TW_SKIP_SYSTEM_RO_PAGE := true
 TARGET_FIX_XIAOMI_TOUCH_BOOT_PATH := /dev/block/bootdevice/by-name/boot
+endif
+ifeq ($(RECOVERY_VARIANT),carliv)
+#VIBRATOR_TIMEOUT_FILE := /sys/devices/virtual/timed_output/vibrator/enable
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
+DEVICE_RESOLUTION := 1080x1920
+BOARD_HAS_MTK_CPU := true
+BOARD_NEEDS_MTK_GETSIZE := true
+endif
+ifeq ($(RECOVERY_VARIANT),caf)
+RECOVERY_SDCARD_ON_DATA := true
+RECOVERY_HAD_EXTERNAL_SDCARD := true
+endif
+
